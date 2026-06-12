@@ -1,0 +1,426 @@
+/* ==========================================================================
+   RESET & BASE STYLES
+   ========================================================================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
+}
+
+body {
+    background-color: #0b0d19;
+    color: #ffffff;
+    overflow-x: hidden;
+}
+
+/* CONTAINER UTAMA */
+.dashboard-container {
+    display: flex;
+    min-height: 100vh;
+}
+
+/* ==========================================================================
+   SIDEBAR NAVIGASI
+   ========================================================================== */
+.sidebar {
+    width: 240px;
+    background-color: #0d0f22;
+    border-right: 1px solid #1e223b;
+    padding: 25px 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.logo-section {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 40px;
+}
+
+.logo-icon {
+    font-size: 28px;
+    color: #6366f1;
+}
+
+.logo-text h2 {
+    font-size: 18px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+}
+
+.logo-text span {
+    font-size: 12px;
+    color: #a5b4fc;
+}
+
+.nav-menu {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.nav-item {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 12px 15px;
+    color: #94a3b8;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    border-radius: 10px;
+    transition: all 0.3s ease;
+}
+
+.nav-item:hover, .nav-item.active {
+    background: linear-gradient(135deg, #4f46e5 0%, #3b82f6 100%);
+    color: #ffffff;
+}
+
+/* ==========================================================================
+   MAIN CONTENT AREA & HEADER
+   ========================================================================== */
+.main-content {
+    flex: 1;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.main-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header-title h1 {
+    font-size: 24px;
+    font-weight: 600;
+}
+
+.header-title p {
+    font-size: 13px;
+    color: #64748b;
+    margin-top: 4px;
+}
+
+.search-box {
+    background-color: #13162c;
+    border: 1px solid #222647;
+    border-radius: 10px;
+    padding: 10px 15px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 280px;
+}
+
+.search-box i {
+    color: #475569;
+}
+
+.search-box input {
+    background: none;
+    border: none;
+    color: #ffffff;
+    outline: none;
+    width: 100%;
+    font-size: 13px;
+}
+
+/* GRID LAYOUT COLUMNS */
+.content-grid {
+    display: flex;
+    gap: 25px;
+}
+
+.left-column {
+    flex: 2.5;
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.right-column {
+    flex: 1.3;
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+/* ==========================================================================
+   TOP KANBAN / KPI CARDS
+   ========================================================================== */
+.cards-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
+}
+
+.card {
+    background-color: #12142d;
+    border: 1px solid #1f2347;
+    border-radius: 16px;
+    padding: 20px;
+    position: relative;
+    overflow: hidden;
+}
+
+.card-title {
+    font-size: 12px;
+    color: #94a3b8;
+    display: block;
+    margin-bottom: 10px;
+}
+
+.card-value {
+    font-size: 26px;
+    font-weight: 700;
+    margin-bottom: 6px;
+}
+
+.card-sub {
+    font-size: 11px;
+    color: #64748b;
+}
+
+.card-sub.positive { color: #10b981; }
+.card-sub.negative { color: #ef4444; }
+
+/* Emoji Floating Badge */
+.emoji-badge {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+}
+.emoji-badge.happy { background-color: rgba(16, 185, 129, 0.2); color: #10b981; }
+.emoji-badge.neutral-emoji { background-color: rgba(245, 158, 11, 0.2); color: #f59e0b; }
+
+/* ==========================================================================
+   GEOSPATIAL MAP ENGINE BLOCK
+   ========================================================================== */
+.map-wrapper {
+    height: 520px;
+    background-color: #12142d;
+    border: 1px solid #1f2347;
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+#map {
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+/* Override background default Leaflet container */
+.leaflet-container {
+    background: #0f1123 !important;
+}
+
+/* ==========================================================================
+   SIDE PANELS & SENTIMENT BAR GRAPHICS
+   ========================================================================== */
+.panel {
+    background-color: #12142d;
+    border: 1px solid #1f2347;
+    border-radius: 16px;
+    padding: 22px;
+}
+
+.panel h3 {
+    font-size: 15px;
+    font-weight: 600;
+    margin-bottom: 20px;
+    color: #f8fafc;
+}
+
+.sentiment-item {
+    margin-bottom: 18px;
+}
+
+.sentiment-labels {
+    display: flex;
+    justify-content: space-between;
+    font-size: 13px;
+    color: #94a3b8;
+    margin-bottom: 6px;
+}
+
+.progress-bar {
+    width: 100%;
+    height: 8px;
+    background-color: #1e2246;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.progress {
+    height: 100%;
+    border-radius: 4px;
+    transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.fill-positive { background: linear-gradient(90deg, #a855f7, #6366f1); }
+.fill-negative { background: linear-gradient(90deg, #f43f5e, #ec4899); }
+.fill-neutral { background: linear-gradient(90deg, #64748b, #94a3b8); }
+
+/* ==========================================================================
+   REAL-TIME GPS INPUT FORM INTERFACES
+   ========================================================================== */
+.form-panel {
+    border: 1px solid #312e81; 
+}
+
+.form-group {
+    margin-bottom: 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.form-row {
+    display: flex;
+    gap: 12px;
+}
+
+.form-row .form-group {
+    flex: 1;
+}
+
+label {
+    font-size: 12px;
+    color: #94a3b8;
+    font-weight: 500;
+}
+
+input[type="text"], input[type="number"], select {
+    background-color: #0b0d19;
+    border: 1px solid #222647;
+    border-radius: 8px;
+    padding: 10px 12px;
+    color: #ffffff;
+    font-size: 13px;
+    outline: none;
+    transition: border 0.3s;
+}
+
+input:focus, select:focus {
+    border-color: #6366f1;
+}
+
+/* Tombol Sensor GPS Perangkat */
+.btn-gps {
+    width: 100%;
+    padding: 11px;
+    background-color: #161933;
+    border: 1px dashed #4f46e5;
+    border-radius: 8px;
+    color: #818cf8;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: all 0.2s ease;
+}
+
+.btn-gps:hover {
+    background-color: #1e1b4b;
+    color: #ffffff;
+    border-style: solid;
+}
+
+/* Pengunci input koordinat otomatis */
+input[readonly] {
+    background-color: #111322;
+    color: #6366f1;
+    border-color: #1e2246;
+    cursor: not-allowed;
+    font-weight: 500;
+}
+
+.gps-status-text {
+    font-size: 11px;
+    color: #64748b;
+    margin-top: 2px;
+    display: block;
+    text-align: center;
+}
+
+.btn-submit {
+    width: 100%;
+    padding: 12px;
+    background: linear-gradient(135deg, #4f46e5 0%, #3b82f6 100%);
+    border: none;
+    border-radius: 8px;
+    color: white;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: opacity 0.2s;
+}
+
+.btn-submit:hover {
+    opacity: 0.9;
+}
+
+/* ==========================================================================
+   CUSTOM EMOJI MARKER GEOSPATIAL STYLES (REVISI EMOJI GLOW)
+   ========================================================================== */
+.custom-emoji-marker {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    border: 2px solid #ffffff;
+    box-shadow: 0 0 12px rgba(0, 0, 0, 0.6);
+    transition: transform 0.2s ease-in-out;
+    cursor: pointer;
+}
+
+.custom-emoji-marker:hover {
+    transform: scale(1.2);
+    z-index: 999 !important;
+}
+
+.marker-positive {
+    background-color: rgba(16, 185, 129, 0.85); /* Hijau */
+    box-shadow: 0 0 15px rgba(16, 185, 129, 0.6), inset 0 0 4px rgba(255, 255, 255, 0.5);
+}
+
+.marker-negative {
+    background-color: rgba(239, 68, 68, 0.85); /* Merah */
+    box-shadow: 0 0 15px rgba(239, 68, 68, 0.6), inset 0 0 4px rgba(255, 255, 255, 0.5);
+}
+
+.marker-neutral {
+    background-color: rgba(245, 158, 11, 0.85); /* Kuning */
+    box-shadow: 0 0 15px rgba(245, 158, 11, 0.6), inset 0 0 4px rgba(255, 255, 255, 0.5);
+}
+
+/* Tema Dark Mode Box Info Popup Leaflet */
+.leaflet-popup-content-wrapper {
+    background: #12142d !important;
+    border: 1px solid #1f2347;
+    border-radius: 12px;
+}
+.leaflet-popup-tip {
+    background: #12142d !important;
+}

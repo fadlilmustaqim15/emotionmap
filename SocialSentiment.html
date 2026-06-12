@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Social Sentiment - Emotion Smart City</title>
+<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+<div class="app">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="brand">
+      <div class="brand-icon"><i class="fa-solid fa-brain"></i></div>
+      <div class="brand-text">
+        <div class="brand-title">Emotion</div>
+        <div class="brand-sub">Smart City</div>
+      </div>
+    </div>
+
+   <nav class="nav-menu">
+    <a href="index.html" class="nav-item"><i class="fa-solid fa-chart-simple"></i> Dashboard</a>
+    
+    <a href="EmotionalMap.html" class="nav-item"><i class="fa-solid fa-map-location-dot"></i> Emotional Map</a>
+    
+    <a href="ai-analytics.html" class="nav-item"><i class="fa-solid fa-microchip"></i> AI Analytics</a>
+    
+    <a href="SocialSentiment.html" class="nav-item"><i class="fa-solid fa-users"></i> Social Sentiment</a>
+    
+    <a href="recommendation.html" class="nav-item"><i class="fa-solid fa-lightbulb"></i> Recommendation</a>
+    
+    <a href="Settings.html" class="nav-item"><i class="fa-solid fa-gear"></i> Settings</a>
+</nav>
+
+    <div class="side-card">
+      <div class="side-card-title">SENTIMENT OVERVIEW</div>
+      <div class="gauge-wrap">
+        <div class="chart-box chart-box-gauge">
+          <canvas id="gaugeChart"></canvas>
+        </div>
+        <div class="gauge-center">
+          <div class="gauge-value">72%</div>
+          <div class="gauge-label">Sentimen Positif</div>
+        </div>
+      </div>
+      <div class="side-up"><i class="fa-solid fa-arrow-up"></i> 9.4% dari periode lalu</div>
+      <div class="chart-box chart-box-mini">
+        <canvas id="miniLine1"></canvas>
+      </div>
+    </div>
+
+    <div class="side-card">
+      <div class="side-card-title">TREND HARIAN</div>
+      <div class="chart-box chart-box-mini2">
+        <canvas id="miniLine2"></canvas>
+      </div>
+      <div class="mini-x-axis">
+        <span>19 Mei</span><span>25 Mei</span><span>31 Mei</span><span>6 Jun</span><span>12 Jun</span><span>25 Jun</span>
+      </div>
+    </div>
+  </aside>
+
+  <!-- MAIN -->
+  <main class="main">
+    <header class="topbar">
+      <div>
+        <h1>Social Sentiment</h1>
+        <p>Analisis sentimen masyarakat dari media sosial secara real-time</p>
+      </div>
+      <div class="topbar-actions">
+        <button class="date-range"><i class="fa-regular fa-calendar"></i> 25 Mei 2025 - 25 Juni 2025</button>
+        <button class="export-btn"><i class="fa-solid fa-arrow-up-from-bracket"></i> Export Report</button>
+        <button class="icon-btn bell"><i class="fa-regular fa-bell"></i><span class="badge">3</span></button>
+        <button class="icon-btn"><i class="fa-regular fa-sun"></i></button>
+        <button class="icon-btn"><i class="fa-regular fa-moon"></i></button>
+        <div class="profile">
+          <div class="avatar"><i class="fa-solid fa-user"></i></div>
+          <div class="profile-text">
+            <div class="profile-name">Admin</div>
+            <div class="profile-role">Super Admin</div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- STAT CARDS -->
+    <section class="stats-row">
+      <div class="stat-card">
+        <div class="stat-icon purple"><i class="fa-solid fa-comment"></i></div>
+        <div class="stat-info">
+          <div class="stat-label">Total Mention</div>
+          <div class="stat-value">12.458</div>
+          <div class="stat-delta up"><i class="fa-solid fa-arrow-up"></i> 15.7% dari periode lalu</div>
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon green"><i class="fa-regular fa-face-smile"></i></div>
+        <div class="stat-info">
+          <div class="stat-label">Sentimen Positif</div>
+          <div class="stat-value">72%</div>
+          <div class="stat-delta up"><i class="fa-solid fa-arrow-up"></i> 9.4% dari periode lalu</div>
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon red"><i class="fa-regular fa-face-angry"></i></div>
+        <div class="stat-info">
+          <div class="stat-label">Sentimen Negatif</div>
+          <div class="stat-value">18%</div>
+          <div class="stat-delta down"><i class="fa-solid fa-arrow-down"></i> 4.2% dari periode lalu</div>
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon yellow"><i class="fa-regular fa-face-meh"></i></div>
+        <div class="stat-info">
+          <div class="stat-label">Sentimen Netral</div>
+          <div class="stat-value">10%</div>
+          <div class="stat-delta down"><i class="fa-solid fa-arrow-down"></i> 5.2% dari periode lalu</div>
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon blue"><i class="fa-solid fa-users"></i></div>
+        <div class="stat-info">
+          <div class="stat-label">Engagement</div>
+          <div class="stat-value">25.896</div>
+          <div class="stat-delta up"><i class="fa-solid fa-arrow-up"></i> 12.1% dari periode lalu</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- GRID -->
+    <section class="grid-3">
+      <!-- Trend chart -->
+      <div class="panel span-2">
+        <div class="panel-head">
+          <h3>TREND SENTIMEN DARI WAKTU KE WAKTU</h3>
+          <div class="legend">
+            <span class="dot green"></span>Positif
+            <span class="dot red"></span>Negatif
+            <span class="dot yellow"></span>Netral
+          </div>
+          <select class="select-sm">
+            <option>7 Hari Terakhir</option>
+            <option>30 Hari Terakhir</option>
+          </select>
+        </div>
+        <div class="chart-box chart-box-lg">
+          <canvas id="trendChart"></canvas>
+        </div>
+      </div>
+
+      <!-- Donut -->
+      <div class="panel">
+        <div class="panel-head"><h3>DISTRIBUSI SENTIMEN</h3></div>
+        <div class="donut-wrap">
+          <div class="chart-box chart-box-donut">
+            <canvas id="donutChart"></canvas>
+          </div>
+          <div class="donut-center">
+            <div class="donut-total-label">Total</div>
+            <div class="donut-total-value">12.458</div>
+            <div class="donut-total-label">Mention</div>
+          </div>
+        </div>
+        <div class="donut-legend">
+          <div class="donut-item"><span class="dot green"></span><div><strong>Positif</strong><br>72% (8.966)</div></div>
+          <div class="donut-item"><span class="dot red"></span><div><strong>Negatif</strong><br>18% (2.239)</div></div>
+          <div class="donut-item"><span class="dot yellow"></span><div><strong>Netral</strong><br>10% (1.253)</div></div>
+        </div>
+      </div>
+
+      <!-- Topik populer -->
+      <div class="panel">
+        <div class="panel-head"><h3>TOPIK POPULER</h3></div>
+        <div class="tags">
+          <span class="tag blue">#AlunAlunBatu <b>1.245</b></span>
+          <span class="tag blue">#Kemacetan <b>892</b></span>
+          <span class="tag green">#TamanKotaBatu <b>781</b></span>
+          <span class="tag green">#PolusiUdara <b>640</b></span>
+          <span class="tag yellow">#Sampah <b>532</b></span>
+          <span class="tag blue">#Transportasi <b>480</b></span>
+          <span class="tag green">#smartcity <b>421</b></span>
+          <span class="tag green">#BatuBersih <b>387</b></span>
+          <span class="tag yellow">#EventKotaBatu <b>302</b></span>
+          <span class="tag red">#Keamanan <b>298</b></span>
+        </div>
+        <a href="#" class="link-more">Lihat Semua Topik <i class="fa-solid fa-arrow-right"></i></a>
+      </div>
+
+      <!-- Map -->
+      <div class="panel span-2">
+        <div class="panel-head">
+          <h3>PETA SENTIMEN PER AREA</h3>
+          <select class="select-sm">
+            <option>Semua Area</option>
+          </select>
+        </div>
+        <div class="map-area">
+          <div class="map-grid"></div>
+          <div class="map-pin pos" style="top:32%; left:18%;">
+            <i class="fa-regular fa-face-smile"></i>
+            <div class="pin-label">Taman Kota Batu</div>
+          </div>
+          <div class="map-pin neg" style="top:40%; left:48%;">
+            <i class="fa-solid fa-face-angry"></i>
+            <div class="pin-label">Alun-Alun Batu</div>
+          </div>
+          <div class="map-pin pos" style="top:62%; left:24%;">
+            <i class="fa-regular fa-face-smile"></i>
+            <div class="pin-label">Museum Angkut</div>
+          </div>
+          <div class="map-pin neu" style="top:55%; left:78%;">
+            <i class="fa-regular fa-face-meh"></i>
+            <div class="pin-label">Terminal Batu</div>
+          </div>
+          <div class="map-controls">
+            <button>+</button>
+            <button>-</button>
+            <button><i class="fa-solid fa-location-crosshairs"></i></button>
+          </div>
+        </div>
+        <div class="map-legend">
+          <span>Sentimen Positif</span>
+          <div class="gradient-bar"></div>
+          <span>Sentimen Negatif</span>
+        </div>
+      </div>
+
+      <!-- Word cloud -->
+      <div class="panel">
+        <div class="panel-head"><h3>KATA KUNCI POPULER</h3></div>
+        <div class="wordcloud">
+          <span style="font-size:2.4rem; color:#ef4444; font-weight:800;">kemacetan</span>
+          <span style="font-size:1rem; color:#f59e0b;">sampah</span>
+          <span style="font-size:0.95rem; color:#ef4444;">transportasi</span>
+          <span style="font-size:1.1rem; color:#22c55e;">polusi udara</span>
+          <span style="font-size:1.2rem; color:#ef4444;">palusi udara</span>
+          <span style="font-size:0.85rem; color:#ef4444;">macet</span>
+          <span style="font-size:0.8rem; color:#94a3b8;">arnaan</span>
+          <span style="font-size:1.3rem; color:#22c55e;">sampa</span>
+          <span style="font-size:1.4rem; color:#22c55e;">pedaan</span>
+          <span style="font-size:0.75rem; color:#94a3b8;">katonan</span>
+          <span style="font-size:0.85rem; color:#94a3b8;">cctv</span>
+          <span style="font-size:0.7rem; color:#f59e0b;">parkir</span>
+          <span style="font-size:1.6rem; color:#22c55e; font-weight:700;">taman kota</span>
+          <span style="font-size:0.85rem; color:#22c55e;">nyaman</span>
+          <span style="font-size:0.75rem; color:#f59e0b;">potong</span>
+          <span style="font-size:1.6rem; color:#22c55e; font-weight:700;">udara bersih</span>
+          <span style="font-size:0.7rem; color:#94a3b8;">parkir</span>
+          <span style="font-size:0.8rem; color:#94a3b8;">pedagang</span>
+          <span style="font-size:0.7rem; color:#94a3b8;">taman</span>
+        </div>
+      </div>
+
+      <!-- Mention terpopuler -->
+      <div class="panel">
+        <div class="panel-head"><h3>MENTION TERPOPULER</h3></div>
+        <div class="mentions">
+          <div class="mention">
+            <div class="m-avatar"><i class="fa-solid fa-user"></i></div>
+            <div class="m-body">
+              <div class="m-head"><span class="m-name">@batu_update</span><span class="m-time">2 menit lalu</span><span class="m-tag negative">Negatif</span></div>
+              <p>Kemacetan parah di Alun-Alun Batu sore ini 😡 #kemacetan #alunalunbatu</p>
+            </div>
+          </div>
+          <div class="mention">
+            <div class="m-avatar"><i class="fa-solid fa-user"></i></div>
+            <div class="m-body">
+              <div class="m-head"><span class="m-name">@yukjalanbatu</span><span class="m-time">5 menit lalu</span><span class="m-tag positive">Positif</span></div>
+              <p>Taman Kota Batu pagi ini sejuk dan nyaman 🌳😊 #tamankotabatu</p>
+            </div>
+          </div>
+          <div class="mention">
+            <div class="m-avatar"><i class="fa-solid fa-user"></i></div>
+            <div class="m-body">
+              <div class="m-head"><span class="m-name">@info_batu</span><span class="m-time">7 menit lalu</span><span class="m-tag negative">Negatif</span></div>
+              <p>Polusi udara di Batu meningkat, warga harap lebih diperhatikan 😔 #polusiudara</p>
+            </div>
+          </div>
+        </div>
+        <a href="#" class="link-more">Lihat Semua Mention <i class="fa-solid fa-arrow-right"></i></a>
+      </div>
+
+      <!-- Sumber data -->
+      <div class="panel">
+        <div class="panel-head"><h3>SUMBER DATA</h3></div>
+        <div class="sources">
+          <div class="source"><i class="fa-brands fa-twitter" style="color:#1DA1F2"></i><div class="source-pct">45%</div><div class="source-name">Twitter</div></div>
+          <div class="source"><i class="fa-brands fa-instagram" style="color:#E1306C"></i><div class="source-pct">25%</div><div class="source-name">Instagram</div></div>
+          <div class="source"><i class="fa-brands fa-facebook" style="color:#1877F2"></i><div class="source-pct">15%</div><div class="source-name">Facebook</div></div>
+          <div class="source"><i class="fa-brands fa-tiktok" style="color:#fff"></i><div class="source-pct">10%</div><div class="source-name">TikTok</div></div>
+          <div class="source"><i class="fa-solid fa-ellipsis"></i><div class="source-pct">5%</div><div class="source-name">Lainnya</div></div>
+        </div>
+      </div>
+
+      <!-- Sentimen per kategori -->
+      <div class="panel">
+        <div class="panel-head">
+          <h3>SENTIMEN BERDASARKAN KATEGORI</h3>
+          <div class="legend">
+            <span class="dot green"></span>Positif
+            <span class="dot red"></span>Negatif
+            <span class="dot yellow"></span>Netral
+          </div>
+        </div>
+        <div class="cat-bars">
+          <div class="cat-row">
+            <div class="cat-name">Kemacetan</div>
+            <div class="cat-bar"><div class="seg green" style="width:30%">30%</div><div class="seg red" style="width:55%">55%</div><div class="seg yellow" style="width:15%">15%</div></div>
+          </div>
+          <div class="cat-row">
+            <div class="cat-name">Polusi</div>
+            <div class="cat-bar"><div class="seg green" style="width:25%">25%</div><div class="seg red" style="width:60%">60%</div><div class="seg yellow" style="width:15%">15%</div></div>
+          </div>
+          <div class="cat-row">
+            <div class="cat-name">Kebersihan</div>
+            <div class="cat-bar"><div class="seg green" style="width:65%">65%</div><div class="seg red" style="width:20%">20%</div><div class="seg yellow" style="width:15%">15%</div></div>
+          </div>
+          <div class="cat-row">
+            <div class="cat-name">Fasilitas Umum</div>
+            <div class="cat-bar"><div class="seg green" style="width:70%">70%</div><div class="seg red" style="width:15%">15%</div><div class="seg yellow" style="width:15%">15%</div></div>
+          </div>
+          <div class="cat-row">
+            <div class="cat-name">Keamanan</div>
+            <div class="cat-bar"><div class="seg green" style="width:80%">80%</div><div class="seg red" style="width:10%">10%</div><div class="seg yellow" style="width:10%">10%</div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Insight AI -->
+      <div class="panel">
+        <div class="panel-head"><h3>INSIGHT AI</h3></div>
+        <div class="insights">
+          <div class="insight"><i class="fa-solid fa-chart-line green"></i><p>Sentimen positif meningkat <strong>9.4%</strong> dibandingkan periode lalu, terutama karena topik tentang taman kota dan udara bersih.</p></div>
+          <div class="insight"><i class="fa-solid fa-triangle-exclamation red"></i><p>Topik kemacetan dan polusi udara masih mendominasi sentimen negatif.</p></div>
+          <div class="insight"><i class="fa-solid fa-lightbulb yellow"></i><p>Warga berharap ada peningkatan fasilitas umum dan pengelolaan sampah.</p></div>
+        </div>
+        <a href="#" class="link-more block">Lihat Rekomendasi AI <i class="fa-solid fa-arrow-right"></i></a>
+      </div>
+
+      <!-- Alert -->
+      <div class="panel alert-panel">
+        <div class="panel-head"><h3 class="alert-title"><i class="fa-solid fa-triangle-exclamation"></i> ALERT SENTIMEN</h3></div>
+        <p class="alert-desc">Peningkatan sentimen negatif terdeteksi!</p>
+        <div class="alert-info">
+          <div><span>Topik:</span> Kemacetan</div>
+          <div><span>Lokasi:</span> Alun-Alun Batu</div>
+          <div><span>Waktu:</span> 15:00 - 18:00</div>
+        </div>
+        <button class="alert-btn">Lihat Detail</button>
+      </div>
+    </section>
+  </main>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

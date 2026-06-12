@@ -1,0 +1,452 @@
+SETTINGGS
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Settings Dashboard</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
+
+body{
+background:#030B23;
+color:white;
+height:100vh;
+overflow:hidden;
+}
+
+/* LAYOUT */
+
+.container{
+display:flex;
+height:100vh;
+}
+
+/* SIDEBAR */
+
+.sidebar{
+width:280px;
+background:#07112D;
+padding:25px;
+border-right:1px solid rgba(255,255,255,0.08);
+}
+
+.logo{
+margin-bottom:40px;
+}
+
+.logo h1{
+font-size:38px;
+font-weight:700;
+}
+
+.logo p{
+color:#A8B0C5;
+font-size:14px;
+margin-top:5px;
+}
+
+.menu{
+list-style:none;
+}
+
+.menu li{
+padding:15px;
+margin-bottom:10px;
+border-radius:14px;
+cursor:pointer;
+transition:.3s;
+color:#D7DDF0;
+}
+
+.menu li:hover{
+background:#111E46;
+}
+
+.menu li.active{
+background:linear-gradient(
+90deg,
+#5B21B6,
+#7C3AED
+);
+box-shadow:0 0 20px rgba(124,58,237,.4);
+}
+
+/* CONTENT */
+
+.content{
+flex:1;
+padding:30px;
+overflow:auto;
+}
+
+.tabs{
+display:flex;
+gap:10px;
+background:#07112D;
+padding:10px;
+border-radius:16px;
+margin-bottom:25px;
+}
+
+.tabs button{
+background:none;
+border:none;
+color:white;
+padding:12px 20px;
+cursor:pointer;
+font-size:15px;
+}
+
+.tabs .active{
+border-bottom:3px solid #8B5CF6;
+}
+
+/* CARD */
+
+.cards{
+display:grid;
+grid-template-columns:1.3fr 1fr 1fr;
+gap:20px;
+}
+
+.card{
+background:#0A1635;
+padding:25px;
+border-radius:20px;
+border:1px solid rgba(255,255,255,.05);
+}
+
+.card h3{
+margin-bottom:20px;
+font-weight:600;
+}
+
+/* PROFILE */
+
+.profile{
+display:flex;
+align-items:center;
+gap:15px;
+margin-bottom:20px;
+}
+
+.profile img{
+width:75px;
+height:75px;
+border-radius:50%;
+border:3px solid #7C3AED;
+}
+
+.name-box{
+background:#111E46;
+padding:12px 18px;
+border-radius:10px;
+}
+
+label{
+display:block;
+margin-top:15px;
+margin-bottom:8px;
+color:#B7C0D8;
+}
+
+input,
+select{
+width:100%;
+padding:13px;
+border:none;
+border-radius:10px;
+background:#111E46;
+color:white;
+}
+
+.save-btn{
+width:100%;
+margin-top:20px;
+padding:14px;
+border:none;
+border-radius:12px;
+font-weight:600;
+cursor:pointer;
+color:white;
+
+background:linear-gradient(
+90deg,
+#5B21B6,
+#8B5CF6
+);
+}
+
+/* TOGGLE */
+
+.switch-row{
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin:25px 0;
+}
+
+.switch{
+position:relative;
+display:inline-block;
+width:55px;
+height:30px;
+}
+
+.switch input{
+display:none;
+}
+
+.slider{
+position:absolute;
+cursor:pointer;
+top:0;
+left:0;
+right:0;
+bottom:0;
+background:#6B7280;
+transition:.3s;
+border-radius:50px;
+}
+
+.slider:before{
+content:"";
+position:absolute;
+height:22px;
+width:22px;
+left:4px;
+top:4px;
+background:white;
+border-radius:50%;
+transition:.3s;
+}
+
+.switch input:checked + .slider{
+background:#4ADE80;
+}
+
+.switch input:checked + .slider:before{
+transform:translateX(25px);
+}
+
+/* RESPONSIVE */
+
+@media(max-width:1200px){
+
+.cards{
+grid-template-columns:1fr;
+}
+
+.sidebar{
+width:220px;
+}
+
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<!-- SIDEBAR -->
+
+<div class="sidebar">
+
+<div class="logo">
+<h1>SETTINGS</h1>
+<p>Kelola preferensi dan akun Anda</p>
+</div>
+
+<ul class="menu">
+<li>🏠 Dashboard</li>
+<li>😊 Emotional Map</li>
+<li>📊 AI Analytics</li>
+<li>🎯 Recommendation</li>
+<li>💜 Healing Zone</li>
+<li>📄 Citizen Report</li>
+<li>📈 Social Sentiment</li>
+<li class="active">⚙️ Settings</li>
+</ul>
+
+</div>
+
+<!-- CONTENT -->
+
+<div class="content">
+
+<div class="tabs">
+<button class="active">Profil</button>
+<button>Notifikasi</button>
+<button>Privasi</button>
+<button>Tampilan</button>
+<button>Bahasa</button>
+<button>Tentang</button>
+</div>
+
+<div class="cards">
+
+<!-- AKUN -->
+
+<div class="card">
+
+<h3>Informasi Akun</h3>
+
+<div class="profile">
+<img src="https://i.pravatar.cc/150?img=12">
+<div class="name-box">Zen Ahmad</div>
+</div>
+
+<label>Email</label>
+<input type="email" id="email">
+
+<label>Nomor Telepon</label>
+<input type="text" id="telepon">
+
+<label>Alamat</label>
+<input type="text" id="alamat">
+
+<button class="save-btn" onclick="simpanData()">
+Simpan Perubahan
+</button>
+
+</div>
+
+<!-- NOTIFIKASI -->
+
+<div class="card">
+
+<h3>Notifikasi</h3>
+
+<div class="switch-row">
+<span>Laporan Harian AI</span>
+<label class="switch">
+<input type="checkbox" checked>
+<span class="slider"></span>
+</label>
+</div>
+
+<div class="switch-row">
+<span>Peringatan Area Stres</span>
+<label class="switch">
+<input type="checkbox" checked>
+<span class="slider"></span>
+</label>
+</div>
+
+<div class="switch-row">
+<span>Rekomendasi Healing Zone</span>
+<label class="switch">
+<input type="checkbox" checked>
+<span class="slider"></span>
+</label>
+</div>
+
+<div class="switch-row">
+<span>Laporan Citizen Report</span>
+<label class="switch">
+<input type="checkbox" checked>
+<span class="slider"></span>
+</label>
+</div>
+
+<div class="switch-row">
+<span>Update Sistem</span>
+<label class="switch">
+<input type="checkbox">
+<span class="slider"></span>
+</label>
+</div>
+
+</div>
+
+<!-- PREFERENSI -->
+
+<div class="card">
+
+<h3>Preferensi</h3>
+
+<label>Satuan Suhu</label>
+<select>
+<option>°C</option>
+<option>°F</option>
+</select>
+
+<label>Jarak</label>
+<select>
+<option>Kilometer (km)</option>
+<option>Miles</option>
+</select>
+
+<label>Tema</label>
+<select>
+<option>Gelap</option>
+<option>Terang</option>
+</select>
+
+<label>Bahasa</label>
+<select>
+<option>Bahasa Indonesia</option>
+<option>English</option>
+</select>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<script>
+
+// Saat halaman dibuka
+window.onload = function(){
+
+    document.getElementById("email").value =
+    localStorage.getItem("email") || "";
+
+    document.getElementById("telepon").value =
+    localStorage.getItem("telepon") || "";
+
+    document.getElementById("alamat").value =
+    localStorage.getItem("alamat") || "";
+
+};
+
+// Simpan data
+function simpanData(){
+
+    let email =
+    document.getElementById("email").value;
+
+    let telepon =
+    document.getElementById("telepon").value;
+
+    let alamat =
+    document.getElementById("alamat").value;
+
+    localStorage.setItem("email", email);
+    localStorage.setItem("telepon", telepon);
+    localStorage.setItem("alamat", alamat);
+
+    alert("✅ Data berhasil disimpan!");
+
+}
+
+</script>
+
+</body>
+</html>

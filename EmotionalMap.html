@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emotion Smart City - Emotional Map</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <link rel="stylesheet" href="StyleE.css">
+</head>
+<body>
+
+    <div class="app-container">
+        <aside class="main-sidebar">
+            <div class="brand-section">
+                <i class="fa-solid fa-brain brand-icon"></i>
+                <div class="brand-text">
+                    <h2>Emotion</h2>
+                    <span>Smart City</span>
+                </div>
+            </div>
+            
+            <nav class="nav-menu">
+                <a href="index.html" class="nav-item"><i class="fa-solid fa-chart-simple"></i> Dashboard</a>
+                <a href="EmotionalMap.html" class="nav-item active"><i class="fa-solid fa-map-location-dot"></i> Emotional Map</a>
+                <a href="ai-analytics.html" class="nav-item"><i class="fa-solid fa-microchip"></i> AI Analytics</a>
+                <a href="SocialSentiment.html" class="nav-item"><i class="fa-solid fa-users"></i> Social Sentiment</a>
+                <a href="recommendation.html" class="nav-item"><i class="fa-solid fa-lightbulb"></i> Recommendation</a>
+                <a href="settings.html" class="nav-item"><i class="fa-solid fa-gear"></i> Settings</a>
+            </nav>
+
+            <div class="city-index-card">
+                <span class="card-label">Yogyakarta Emotional Index</span>
+                <div class="index-gauge-wrapper">
+                    <div class="circular-progress">
+                        <span class="progress-value" id="side-index">72%</span>
+                    </div>
+                </div>
+                <div class="gauge-status">Baik <i class="fa-regular fa-face-smile"></i></div>
+                <div class="gauge-trend"><i class="fa-solid fa-arrow-up"></i> 8.4% dari kemarin</div>
+                
+                <div class="mini-chart">
+                    <svg viewBox="0 0 100 30" class="wave-svg">
+                        <path d="M0,25 Q15,5 30,20 T60,10 T90,15 T100,5 L100,30 L0,30 Z" fill="url(#wave-grad)" stroke="#6366f1" stroke-width="2"/>
+                        <defs>
+                            <linearGradient id="wave-grad" x1="0%" y1="0%" x2="0%" y2="100%">
+                                <stop offset="0%" stop-color="rgba(99, 102, 241, 0.4)" />
+                                <stop offset="100%" stop-color="rgba(99, 102, 241, 0)" />
+                            </linearGradient>
+                        </defs>
+                    </svg>
+                </div>
+            </div>
+
+            <button class="btn-export"><i class="fa-solid fa-download"></i> Export Laporan</button>
+        </aside>
+
+        <main class="map-workspace">
+            <header class="top-header">
+                <div class="header-info">
+                    <h1>Emotional Map</h1>
+                    <p>Peta Persebaran Emosi Masyarakat Secara Real-time</p>
+                </div>
+                <div class="header-controls">
+                    <div class="search-wrapper">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                        <input type="text" id="map-search-input" placeholder="Cari lokasi di Jogja...">
+                    </div>
+                    <div class="header-actions">
+                        <div class="notif-badge"><i class="fa-regular fa-bell"></i><span class="dot"></span></div>
+                        <div class="theme-toggle"><i class="fa-regular fa-sun"></i><i class="fa-solid fa-moon active"></i></div>
+                        <div class="user-profile">
+                            <div class="avatar"><i class="fa-solid fa-user"></i></div>
+                            <div class="user-meta">
+                                <h4>Admin</h4>
+                                <span>Super Admin</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <div class="map-container-block">
+                <div class="map-toolbar">
+                    <div class="emotion-filters">
+                        <button class="filter-btn active" data-filter="all">Semua Emosi</button>
+                        <button class="filter-btn" data-filter="Senang"><span class="dot green"></span> Senang</button>
+                        <button class="filter-btn" data-filter="Sedih"><span class="dot blue"></span> Sedih</button>
+                        <button class="filter-btn" data-filter="Emosi"><span class="dot red"></span> Emosi</button>
+                        <button class="filter-btn" data-filter="Khawatir"><span class="dot orange"></span> Khawatir</button>
+                    </div>
+                    <div class="layer-toggles">
+                        <button class="toggle-btn active" id="btn-heatmap"><i class="fa-solid fa-fire"></i> Heatmap</button>
+                        <button class="toggle-btn" id="btn-cluster"><i class="fa-solid fa-circle-nodes"></i> Cluster</button>
+                        <button class="toggle-btn" id="btn-filter-util"><i class="fa-solid fa-filter"></i> Filter</button>
+                    </div>
+                </div>
+
+                <div id="map-gis"></div>
+
+                <div class="map-legend">
+                    <span class="legend-title">Legenda Emosi:</span>
+                    <div class="legend-item"><span class="dot green"></span> Senang</div>
+                    <div class="legend-item"><span class="dot blue"></span> Sedih</div>
+                    <div class="legend-item"><span class="dot red"></span> Emosi</div>
+                    <div class="legend-item"><span class="dot orange"></span> Khawatir</div>
+                    <div class="legend-scale">
+                        <span>Rendah</span>
+                        <div class="gradient-bar"></div>
+                        <span>Tinggi</span>
+                    </div>
+                </div>
+
+                <div class="timeline-container">
+                    <span class="time-label">00:00</span>
+                    <div class="slider-wrapper">
+                        <input type="range" min="0" max="23" value="18" class="timeline-range" id="time-slider">
+                        <div class="time-tip" id="slider-tip" style="left: 75%;">18:00</div>
+                    </div>
+                    <span class="time-label">24:00</span>
+                    <span class="live-indicator active" id="toggle-live"><span class="pulse-dot"></span> <span id="live-text">Realtime</span></span>
+                </div>
+            </div>
+        </main>
+
+        <aside class="analytics-sidebar">
+            <div class="right-panel">
+                <h3><i class="fa-solid fa-pen-to-square"></i> INPUT KONDISI EMOSI</h3>
+                <form id="submission-form" style="margin-top: 10px; display: flex; flex-direction: column; gap: 10px;">
+                    <div class="form-group">
+                        <label>Nama / Inisial</label>
+                        <input type="text" id="inp-name" class="form-input" placeholder="Contoh: Yunus" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Pilih Emosi</label>
+                        <select id="inp-emotion" class="form-select">
+                            <option value="Senang">Senang 😊</option>
+                            <option value="Sedih">Sedih 😢</option>
+                            <option value="Emosi">Emosi / Marah 😡</option>
+                            <option value="Khawatir">Khawatir 😟</option>
+                        </select>
+                    </div>
+                    <button type="button" class="btn-gps" id="btn-trigger-gps"><i class="fa-solid fa-location-crosshairs"></i> Ambil Koordinat Jogja (GPS)</button>
+                    <div class="coord-row">
+                        <div>
+                            <label>Latitude</label>
+                            <input type="text" id="inp-lat" class="form-input" value="-7.7970" required>
+                        </div>
+                        <div>
+                            <label>Longitude</label>
+                            <input type="text" id="inp-lng" class="form-input" value="110.3705" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Catatan/Keterangan Lokasi</label>
+                        <input type="text" id="inp-desc" class="form-input" placeholder="Lalu lintas lancar, cuaca cerah..." required>
+                    </div>
+                    <button type="submit" class="btn-submit">Kirim Data Spasial</button>
+                </form>
+            </div>
+
+            <div class="right-panel">
+                <h3>EMOTION SUMMARY</h3>
+                <div class="donut-chart-box">
+                    <div class="donut-placeholder">
+                        <div class="donut-hole"></div>
+                    </div>
+                    <div class="chart-legends">
+                        <div class="legend-row"><span><i class="fa-solid fa-circle green-text"></i> Senang</span> <b>42%</b></div>
+                        <div class="legend-row"><span><i class="fa-solid fa-circle blue-text"></i> Sedih</span> <b>18%</b></div>
+                        <div class="legend-row"><span><i class="fa-solid fa-circle red-text"></i> Emosi</span> <b>23%</b></div>
+                        <div class="legend-row"><span><i class="fa-solid fa-circle orange-text"></i> Khawatir</span> <b>17%</b></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="right-panel">
+                <h3>AI CITY STATUS</h3>
+                <div class="status-grid">
+                    <div class="status-row"><span>Status Kota</span> <strong class="green-text">Stabil 😊</strong></div>
+                    <div class="status-row"><span>Tingkat Stress</span> <strong class="red-text">23%</strong></div>
+                    <div class="status-row"><span>Tingkat Happiness</span> <strong class="yellow-text">72%</strong></div>
+                    <div class="status-row"><span>Kualitas Udara (AQI)</span> <strong class="yellow-text">78</strong></div>
+                    <div class="status-row"><span>Suhu Kota</span> <strong>31°C</strong></div>
+                </div>
+            </div>
+
+            <div class="right-panel">
+                <h3>PREDIKSI 24 JAM KEDEPAN</h3>
+                <div class="prediction-graph-box">
+                    <div class="mock-line-chart">
+                        <div class="chart-line line-green"></div>
+                        <div class="chart-line line-blue"></div>
+                        <div class="chart-line line-red"></div>
+                    </div>
+                    <div class="chart-x-axis">
+                        <input type="range" min="0" max="1439" value="1108" class="timeline-range" id="time-slider">
+                    </div>
+                </div>
+            </div>
+
+            <div class="right-panel">
+                <h3>HEALING ZONE TERDEKAT</h3>
+                <ul class="healing-list">
+                    <li>
+                        <div class="zone-info"><i class="fa-solid fa-tree green-text"></i> Malioboro & Titik Nol</div>
+                        <span class="zone-dist">0.5 km</span>
+                    </li>
+                    <li>
+                        <div class="zone-info"><i class="fa-solid fa-tree green-text"></i> Alun-Alun Kidul</div>
+                        <span class="zone-dist">1.4 km</span>
+                    </li>
+                    <li>
+                        <div class="zone-info"><i class="fa-solid fa-tree green-text"></i> Taman Pintar Yogyakarta</div>
+                        <span class="zone-dist">1.9 km</span>
+                    </li>
+                </ul>
+                <button class="btn-view-all" style="margin-top: 12px;">Tampilkan Semua</button>
+            </div>
+        </aside>
+    </div>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="https://leaflet.github.io/Leaflet.heat/dist/leaflet-heat.js"></script>
+    <script src="ScriptE.js"></script>
+</body>
+</html>
